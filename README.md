@@ -2,6 +2,10 @@
 
 Welcome to my media app!
 
+# The project is live
+
+https://media-app-nfac.vercel.app/
+
 ## About
 
 This application is a media platform built using Next.js. It allows users to read news articles and other media content.
