@@ -55,7 +55,7 @@ export const fetchPostById = async (id: number): Promise<any> => {
     }
 };
 
-export async function addPost(postData: { title: string; body: string; }): Promise<any> {
+export async function addPost(postData: { title: string; body: string; userId: string; }): Promise<any> {
     try {
         const response = await fetch('https://dummyjson.com/posts/add', {
             method: 'POST',

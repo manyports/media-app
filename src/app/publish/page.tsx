@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 import { addPost } from '@/api/api';
 
 interface PostData {
@@ -10,12 +11,12 @@ interface PostData {
 }
 
 function FormField({
-                       label,
-                       id,
-                       value,
-                       onChange,
-                       type = 'text'
-                   }: {
+    label,
+    id,
+    value,
+    onChange,
+    type = 'text'
+}: {
     label: string;
     id: string;
     value: string;
@@ -51,13 +52,17 @@ function FormField({
 export default function AddPost() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
+    const [userId, setUserId] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
         const token = Cookies.get('authToken');
-        if (!token) {
+        const userId = Cookies.get('userId');
+        if (!token || !userId) {
             window.location.href = '/account';
+        } else {
+            setUserId(userId);
         }
     }, []);
 
@@ -65,11 +70,11 @@ export default function AddPost() {
         e.preventDefault();
         setLoading(true);
         try {
-            await addPost({ title, body });
+            await addPost({ title, body, userId });
             alert('Post added successfully!');
             setTitle('');
             setBody('');
-            window.location.href = '/news';
+            window.location.href = '/mynews';
         } catch (error) {
             console.error('Error adding post:', error);
             setError('Failed to add post');
