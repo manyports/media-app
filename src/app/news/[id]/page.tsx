@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { fetchPostById } from '@/api/api';
+import Image from 'next/image';
 
 interface Post {
     id: number;
@@ -41,8 +42,9 @@ export default function PostDetail() {
 
     return (
         <div className="max-w-2xl mx-auto p-4">
+            <img src="../../../mountains.jpg" alt="Mountains" className="rounded-[20px]" />
             <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-            <p>{post.body}</p>
+            <p className='indent-[3vw]'>{post.body}</p>
             <div className="mt-4">
                 <strong>Tags:</strong> {post.tags.join(', ')}
             </div>
@@ -53,7 +55,7 @@ export default function PostDetail() {
                 <strong>Views:</strong> {post.views}
             </div>
             <div className="mt-2">
-                <strong>User ID:</strong> {post.userId}
+                <strong>Author ID:</strong> {post.userId}
             </div>
             <div className="flex justify-center">
                 <a href="/news">
